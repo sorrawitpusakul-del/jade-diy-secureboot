@@ -1,0 +1,27 @@
+# ==============================================================================
+# SECURE BOOT V2 & FLASH ENCRYPTION CONFIGURATION
+# ==============================================================================
+
+# 1. Enable Secure Boot V2
+CONFIG_SECURE_BOOT=y
+CONFIG_SECURE_BOOT_V2_ENABLED=y
+CONFIG_SECURE_SIGNED_ON_BOOT=y
+CONFIG_SECURE_SIGNED_APPS_NO_RSA_SIGN=y
+CONFIG_SECURE_SIGNED_APPS_RSA_SCHEME=y
+
+# 2. Flash Encryption (Release mode)
+CONFIG_SECURE_FLASH_ENC_ENABLED=y
+CONFIG_SECURE_FLASH_ENCRYPTION_MODE_RELEASE=y
+CONFIG_SECURE_FLASH_UART_BOOTLOADER_ALLOW_ENC=y
+CONFIG_SECURE_FLASH_UART_BOOTLOADER_ALLOW_DEC=n
+CONFIG_SECURE_FLASH_UART_BOOTLOADER_ALLOW_CACHE=n
+
+# 3. Secure ROM DL Mode (Option B: Secure UART Download Mode)
+# This allows flashing signed firmware via UART later without totally disabling the port.
+CONFIG_SECURE_UART_ROM_DL_MODE=y
+CONFIG_SECURE_DISABLE_ROM_DL_MODE=n
+CONFIG_SECURE_ENABLE_SECURE_ROM_DL_MODE=y
+
+# 4. Partition Table Offset Update
+# Secure Boot V2 increases bootloader size, so we MUST move partition table from 0x8000 to 0x10000
+CONFIG_PARTITION_TABLE_OFFSET=0x10000
